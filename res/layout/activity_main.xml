@@ -1,0 +1,130 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.dd.MainActivity" >
+    <TextView 
+        android:id="@+id/status"
+        android:gravity="center"
+	    android:layout_gravity="center"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:text="Status"/>
+
+	<LinearLayout 
+	    android:orientation="vertical"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+
+		<Chronometer
+		    android:id="@+id/time"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="Chronometer" />
+
+		<CheckBox
+		    android:id="@+id/button"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="Start/Stop Recording" />
+		
+	</LinearLayout>
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	        <TextView
+	        android:id="@+id/textView2"
+	        android:layout_weight="2"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="right"
+	        android:text="Pitch"
+	        
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	    <TextView
+	        android:id="@+id/pitch"
+	        android:layout_weight="1"
+	        android:layout_gravity="center"
+	        android:gravity="center"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text=""
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	
+	</LinearLayout>
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	
+	    
+	</LinearLayout>
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	</LinearLayout>
+	<LinearLayout 
+	    android:orientation="horizontal"
+	    android:layout_gravity="center"
+	    android:gravity="center"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	    <TextView
+	        android:id="@+id/textView4"
+	        android:gravity="right"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        
+	        android:text="Gender"
+	        android:layout_weight="2"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	    <TextView
+	        android:id="@+id/gender"
+	        android:layout_weight="1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text=""
+	        android:gravity="center"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	    
+		    
+	</LinearLayout>
+    <TextView 
+        android:id="@+id/titellog"
+        android:gravity="center"
+	    android:layout_gravity="center"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:text="log"/>
+    <TextView 
+        android:id="@+id/log"
+        android:gravity="center"
+	    android:layout_gravity="center"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textAppearance="?android:attr/textAppearanceSmall"
+	    android:text=""/>
+</LinearLayout>
