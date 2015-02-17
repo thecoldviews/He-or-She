@@ -347,7 +347,7 @@ int id action_menu_presenter 0x7f090006
 int id action_mode_bar 0x7f09002e
 int id action_mode_bar_stub 0x7f09002d
 int id action_mode_close_button 0x7f090020
-int id action_settings 0x7f090048
+int id action_settings 0x7f09004a
 int id activity_chooser_view_content 0x7f090021
 int id always 0x7f090014
 int id beginning 0x7f09001b
@@ -363,7 +363,7 @@ int id edit_query 0x7f090033
 int id end 0x7f09001c
 int id expand_activities_button 0x7f090022
 int id expanded_menu 0x7f090028
-int id gender 0x7f090045
+int id gender 0x7f090047
 int id home 0x7f090000
 int id homeAsUp 0x7f09000e
 int id icon 0x7f090026
@@ -371,7 +371,7 @@ int id ifRoom 0x7f090016
 int id image 0x7f090023
 int id listMode 0x7f09000a
 int id list_item 0x7f090025
-int id log 0x7f090047
+int id log 0x7f090049
 int id middle 0x7f09001d
 int id never 0x7f090017
 int id none 0x7f09000f
@@ -394,14 +394,16 @@ int id shortcut 0x7f09002a
 int id showCustom 0x7f090010
 int id showHome 0x7f090011
 int id showTitle 0x7f090012
+int id speech 0x7f090045
 int id split_action_bar 0x7f090004
 int id status 0x7f09003f
 int id submit_area 0x7f09003c
 int id tabMode 0x7f09000c
+int id textView11 0x7f090044
 int id textView2 0x7f090042
-int id textView4 0x7f090044
+int id textView4 0x7f090046
 int id time 0x7f090040
-int id titellog 0x7f090046
+int id titellog 0x7f090048
 int id title 0x7f090027
 int id up 0x7f090001
 int id useLogo 0x7f090013

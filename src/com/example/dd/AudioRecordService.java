@@ -53,14 +53,14 @@ public class AudioRecordService extends Service {
 	    extAudioRecorder.prepare();
 	    extAudioRecorder.start();
 	    Log.i("AudioRecordService", "Start audio recording");		    
-			Toast.makeText(this, "Start audio recording...", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Start audio recording...", Toast.LENGTH_SHORT).show();
 			return START_STICKY;
 		}
 		
 		@Override
 		public void onDestroy()	{
 	    Log.i("AudioRecordService", "Stop audio recording");				
-			Toast.makeText(this, "Stop audio recording...", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Stop audio recording...", Toast.LENGTH_SHORT).show();
 			extAudioRecorder.stop();
 			extAudioRecorder.release();
 			super.onDestroy();

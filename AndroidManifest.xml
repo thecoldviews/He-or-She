@@ -47,6 +47,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name="com.example.dd.ServiceAlarm">
+            <intent-filter>
+                <action android:name="com.example.dd.SERVICE_RUN"/>
+            </intent-filter>
+        </receiver>
          <service android:name="com.example.dd.AudioRecordService"></service>
     </application>
    
