@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<preferencescreen xmlns:android="http://schemas.android.com/apk/res/android">
+ 
+    <preferencecategory android:title="Speech">
+    <edittextpreference android:title="Lower Male/Lower Human" android:summary="Lower Limit for Human Speech" android:key="lm">
+    </edittextpreference>
+    <edittextpreference android:title="Upper Male" android:summary="Upper Limit for Human(Male) Speech" android:key="um">
+    </edittextpreference>
+    <edittextpreference android:title="Lower Female" android:summary="Lower Limit for Human(Female) Speech" android:key="lf">
+    </edittextpreference>
+    <edittextpreference android:title="Upper Female/Upper Human" android:summary="Upper Limit for Human Speech" android:key="uf">
+    </edittextpreference>
+    </preferencecategory>
+     
+    <preferencecategory android:title="Duration">
+    <ListPreference
+            android:key="Duration"
+            android:title="Durtion"
+            android:summary="Duration for recording."
+            android:entries="@array/title"
+            android:entryValues="@array/duration" />
+    </preferencecategory>
+ 	<preferencecategory android:title="Percentage">
+    <ListPreference
+            android:key="Percentage"
+            android:title="Percentage Human Speech Needed"
+            android:summary="Minimum Human Speech Content to evaluate Gender"
+            android:entries="@array/titlep"
+            android:entryValues="@array/percentage" />
+    </preferencecategory>
+</preferencescreen>

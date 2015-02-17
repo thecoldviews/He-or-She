@@ -43,6 +43,14 @@ public class Constants {
 	
 	public static double percentagespeech=0.3;
 	
+	public static int ml=100;
+	public static int mu=160;
+	public static int fl=190;
+	public static int fu=600;
+	
+	public static int duration=1;
+	
+	
 	/** The phone identifier */
 	public static String PHONE_ID;
 	public static String dbName; 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <resources>
+    <string-array name="title">
+        <item name="2">2 Seconds</item>
+        <item name="4">4 Seconds</item>
+        <item name="6">6 Seconds</item>
+    </string-array>
+    <integer-array name="duration">
+        <item name="2">2</item>
+        <item name="4">4</item>
+        <item name="6">6</item>
+        
+    </integer-array>
+    <string-array name="titlep">
+        <item name="2">20%</item>
+        <item name="3">30%</item>
+        <item name="4">40%</item>
+        <item name="5">50%</item>
+        <item name="6">60%</item>
+    </string-array>
+    <integer-array name="percentage">
+        <item name="2">20</item>
+        <item name="3">30</item>
+        <item name="4">40</item>
+        <item name="5">50</item>
+        <item name="6">60</item>
+        
+    </integer-array>
+     
+
+</resources>

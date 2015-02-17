@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Timer;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -12,11 +11,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -35,6 +34,7 @@ import edu.rutgers.winlab.crowdpp.util.Now;
 public class MainActivity extends ActionBarActivity{
 
 	TextView status;
+	TextView thresholds;
 	TextView speech;
 	TextView pitch;
 	TextView gender;
@@ -64,11 +64,11 @@ public class MainActivity extends ActionBarActivity{
 		// uncertain
 		int gender = 0;	
 		// male		
-		if (pitch < 160) {
+		if (pitch < Constants.mu) {
 			gender = 1;	
 		}
 		// female
-		else if (pitch > 190) {
+		else if (pitch > Constants.fl) {
 			gender = 2;	
 		}
 		return gender;
@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity{
 		// uncertain
 		int speech = 0;	
 		
-		if (pitch > 100 && pitch < 600) {
+		if (pitch > Constants.ml && pitch < Constants.fu) {
 			speech = 1;	
 		}
 		else {
@@ -94,7 +94,7 @@ public class MainActivity extends ActionBarActivity{
         AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         PendingIntent pi = PendingIntent.getBroadcast( this, 0, new Intent("com.example.filterMe"),0);
         int delay = 1000; //sec * milisec
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),1000*1*2+ delay, pi); // Millisec * Second * Samples+1
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),1000*Constants.duration*2+ delay, pi); // Millisec * Second * Samples+1
     }
 
     public void cancelAlarm(Context context)
@@ -134,13 +134,14 @@ public class MainActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         status=(TextView)findViewById(R.id.status);
+        thresholds=(TextView)findViewById(R.id.thresholds);
         speech=(TextView)findViewById(R.id.speech);
         time=(Chronometer)findViewById(R.id.time);
         gender=(TextView)findViewById(R.id.gender);
         pitch=(TextView)findViewById(R.id.pitch);
         button=(CheckBox)findViewById(R.id.button);
         log=(TextView)findViewById(R.id.log);
-        
+        showUserSettings();
         BroadcastReceiver br = new BroadcastReceiver() {
             @Override
             public void onReceive(Context c, Intent i) {  
@@ -277,21 +278,68 @@ public class MainActivity extends ActionBarActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
+ 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+ 
+        case R.id.settingsmenu:
+            Intent i = new Intent(this, settings.class);
+            startActivityForResult(i,1);
+            break;
+ 
         }
-        return super.onOptionsItemSelected(item);
+ 
+        return true;
+    }
+ 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+ 
+        switch (requestCode) {
+        case 1:
+            showUserSettings();
+            break;
+ 
+        }
+ 
+    }
+ 
+    private void showUserSettings() {
+        SharedPreferences sharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        Constants.ml=sharedPrefs.getInt("lm", 100);
+        Constants.mu=sharedPrefs.getInt("um", 160);
+        Constants.fl=sharedPrefs.getInt("lf", 190);
+        Constants.fu=sharedPrefs.getInt("uf", 600);
+        Constants.percentagespeech=sharedPrefs.getInt("Percentage", 30)/100.00;
+        Constants.duration=sharedPrefs.getInt("Duration", 2)/2;
+        
+        StringBuilder builder = new StringBuilder();
+ 
+        builder.append("\n Lower Male: "
+        		+ String.valueOf(Constants.ml));
+ 
+        builder.append("\n Upper Male:"
+                + String.valueOf(Constants.mu));
+ 
+        builder.append("\n Lower Female: "
+        		+ String.valueOf(Constants.fl));
+        
+        builder.append("\n Upper Female: "
+        		+ String.valueOf(Constants.fu));
+        
+        builder.append("\n Duration: "
+        		+ String.valueOf(Constants.duration*2));
+        
+        builder.append("\n Percentage%: "
+        		+ String.valueOf(Constants.percentagespeech*100));
+        thresholds.setText(builder.toString());
+        
     }
 
 }
