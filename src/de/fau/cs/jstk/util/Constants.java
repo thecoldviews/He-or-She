@@ -26,6 +26,7 @@ import java.io.File;
 import java.util.Locale;
 
 import android.content.Context;
+import android.media.AudioFormat;
 
 /**
  * The Constants class 
@@ -40,6 +41,15 @@ public class Constants {
 	
 	public static String dbBucket = (ACCESS_KEY_ID + ".crowdppDatabase").toLowerCase(Locale.US);
 	public static String calBucket = (ACCESS_KEY_ID + ".crowdppCalibration").toLowerCase(Locale.US);
+	
+	public static final int RECORDER_BPP = 16;
+    public static final String AUDIO_RECORDER_FILE_EXT_WAV = "";
+    public static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
+    public static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+    public static final int RECORDER_TIME = 2;	//in seconds
+    public static int RECORDING_SAMPLE_RATE = 8000;
+    public static int RECORDING_INDEX = 2;
+    public static int numFeatures = 12;
 	
 	/** The phone identifier */
 	public static String PHONE_ID;

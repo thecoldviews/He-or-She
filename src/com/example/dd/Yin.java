@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import de.fau.cs.jstk.util.Constants;
+
 import android.util.Log;
 
 /**
@@ -177,7 +179,7 @@ public class Yin {
 	}
 
 	public static ArrayList<Float> processStream(AudioFloatInputStream afis, String filename) throws IOException {
-		float sampleRate = 8000;
+		float sampleRate = Constants.RECORDING_SAMPLE_RATE;
 		yinInstance = new Yin(sampleRate);
 		int bufferStepSize = yinInstance.bufferSize - yinInstance.overlapSize;
 

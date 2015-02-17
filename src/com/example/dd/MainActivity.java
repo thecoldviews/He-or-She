@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity{
 		// uncertain
 		int speech = 0;	
 		
-		if (pitch > 100 && pitch < 500) {
+		if (pitch > 100 && pitch < 600) {
 			speech = 1;	
 		}
 		else {
@@ -93,8 +93,8 @@ public class MainActivity extends ActionBarActivity{
     {	    	
         AlarmManager am=(AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         PendingIntent pi = PendingIntent.getBroadcast( this, 0, new Intent("com.example.filterMe"),0);
-        int delay = 6000; //sec * milisec
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), delay, pi); // Millisec * Second * Samples+1
+        int delay = 1000; //sec * milisec
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),1000*1*2+ delay, pi); // Millisec * Second * Samples+1
     }
 
     public void cancelAlarm(Context context)
@@ -103,16 +103,15 @@ public class MainActivity extends ActionBarActivity{
         PendingIntent pi = PendingIntent.getBroadcast( this, 0, new Intent("com.example.filterMe"),0);
         alarmManager.cancel(pi);
         status.setText("Alarm Stopped");
-        pitch.setText("");
-        speech.setText("");
-	    gender.setText("");
-	    log.setText("");
+        
     }
 	
     public static int Median(ArrayList<Integer> to)
     {
         Collections.sort(to);
-     
+        if(to.size()==0){
+        	return 0;
+        }
         if (to.size() % 2 == 1)
     	return to.get((to.size()+1)/2-1);
         else
@@ -124,6 +123,11 @@ public class MainActivity extends ActionBarActivity{
         }	
     }
   
+    private void record(String a) throws InterruptedException {
+        Thread recordingThread = new RecorderThread(this, 1,a);
+        recordingThread.start();
+        recordingThread.join();
+    }
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,41 +143,30 @@ public class MainActivity extends ActionBarActivity{
         
         BroadcastReceiver br = new BroadcastReceiver() {
             @Override
-            public void onReceive(Context c, Intent i) {     
-            	status.setText("Alarm Stopped");
-                pitch.setText("");
-	    	    gender.setText("");
-	    	    speech.setText("");
-	    	    log.setText("");
-	    		time.setBase(SystemClock.elapsedRealtime());
-	    		time.start();
-	    		log.setText("Recording...");
-	  			testWavFile = testDir + "/" + FileProcess.newFileOnTime("wav");
-	  			// start audio recording
-	  			Bundle mbundle = new Bundle();
-	  			mbundle.putString("audiopath", testWavFile);
-	  			Log.i("Main", "start audio recording service");
-	  			status.setText("Recording Audio");
-	  			Intent recordIntent = new Intent(getApplicationContext(), AudioRecordService.class);
-	  			recordIntent.putExtras(mbundle);
+            public void onReceive(Context c, Intent i) {  
+            	
+            	    	time.setBase(SystemClock.elapsedRealtime());
+        	    		time.start();
+        	    		log.setText("Recording...");
+        	    		status.setText("Recording Audio");
+            	 
+	    		
+	  			testWavFile = testDir + "/" + FileProcess.newFileOnTime("wav");	  			
 	  			date = Now.getDate();
 	  			start = Now.getTimeOfDay();
-	  			startService(recordIntent);
-	  			time.setVisibility(View.VISIBLE);
-	    	
-	  			runOnUiThread(new Runnable() {
 
-	                @Override
-	                public void run() {
-	                     final Handler handler = new Handler();
-	                     handler.postDelayed(new Runnable() {
-	                       @Override
-	                       public void run() {
+	  			time.setVisibility(View.VISIBLE);
+	  			try {
+					record(testWavFile);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 	                    	    String test="";
 	                   			int mean=0;
-	                    	   	Intent recordIntent = new Intent(getApplicationContext(), AudioRecordService.class);
+	                    	   	
 	                    	   	status.setText("Analysing Audio");
-	                    	   	stopService(recordIntent);
+	                    	   	
 		       		  			time.stop();
 		       		  			end = Now.getTimeOfDay();
 		       		  			button.setClickable(false);
@@ -187,13 +180,17 @@ public class MainActivity extends ActionBarActivity{
 			       					ArrayList<Integer> toint=new ArrayList<Integer>();
 			       					Log.i("SpeakerCountTask", "Finish YIN");
 			       					
-			       					for(int i=0;i<to.size();i++){
-			       						if(to.get(i)>0){
-			       							count=count+Math.round((to.get(i)));
-			       							toint.add(Math.round((to.get(i))));
-			       							test+=((String.valueOf(Math.round((to.get(i)))))+" ");
+			       					for(int j=0;j<to.size();j++){
+			       						if(to.get(j)>0){
+			       							count=count+Math.round((to.get(j)));
+			       							toint.add(Math.round((to.get(j))));
+			       							test+=((String.valueOf(Math.round((to.get(j)))))+" ");
 			       							size=size+1;
 			       							
+			       						}
+			       						else{
+			       							toint.add(Math.round(0));
+			       							test+=(" . ");
 			       						}
 			       					}
 			       					median=Median(toint);
@@ -227,11 +224,8 @@ public class MainActivity extends ActionBarActivity{
 			       		    	status.setText("Alarm Stopped");
 		       		  			button.setClickable(true);	                     //add your code here
 	                       }
-	                     }, 3000);
+	                     
 
-	                }
-	            });
-            }
 	   };
 	   registerReceiver(br, new IntentFilter("com.example.filterMe") );
         
