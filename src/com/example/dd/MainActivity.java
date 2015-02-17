@@ -173,6 +173,7 @@ public class MainActivity extends ActionBarActivity{
 		       		  			// start speaker counting test
 			       		  		Log.i("SpeakerCountTask", "Start YIN");
 			       				int count=0;
+			       				int countspeech=0;
 			       				int size=0;
 			       				int median=0;
 			       				try {
@@ -181,6 +182,9 @@ public class MainActivity extends ActionBarActivity{
 			       					Log.i("SpeakerCountTask", "Finish YIN");
 			       					
 			       					for(int j=0;j<to.size();j++){
+			       						if(getSpeech(to.get(j))==1){
+			       							countspeech=countspeech+1;
+			       						}
 			       						if(to.get(j)>0){
 			       							count=count+Math.round((to.get(j)));
 			       							toint.add(Math.round((to.get(j))));
@@ -191,6 +195,7 @@ public class MainActivity extends ActionBarActivity{
 			       						else{
 			       							toint.add(Math.round(0));
 			       							test+=(" . ");
+			       							
 			       						}
 			       					}
 			       					median=Median(toint);
@@ -203,15 +208,19 @@ public class MainActivity extends ActionBarActivity{
 			       					e.printStackTrace();
 			       				}
 			       				
-			       				int pitchval=median;
+			       				
+			       				int pitchval=mean;
 			       				pitch.setText(String.valueOf(pitchval));
-			       		    	if(getSpeech(pitchval)==1){
+			       		    	if(getSpeech(pitchval)==1 && (countspeech/size)>Constants.percentagespeech){
 			       		    		speech.setText("Yes");
 			       		    		if(getGender(pitchval)==1){
 			       			    		gender.setText("Male");
 			       			    	}
-			       			    	else{
+			       			    	else if(getGender(pitchval)==2){
 			       			    		gender.setText("Female");
+			       			    	}
+			       			    	else{
+			       			    		gender.setText("Human");
 			       			    	}
 			       		    	}
 			       		    	else{

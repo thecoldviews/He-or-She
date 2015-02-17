@@ -41,6 +41,8 @@ public class Constants {
 	public static String dbBucket = (ACCESS_KEY_ID + ".crowdppDatabase").toLowerCase(Locale.US);
 	public static String calBucket = (ACCESS_KEY_ID + ".crowdppCalibration").toLowerCase(Locale.US);
 	
+	public static double percentagespeech=0.3;
+	
 	/** The phone identifier */
 	public static String PHONE_ID;
 	public static String dbName; 
