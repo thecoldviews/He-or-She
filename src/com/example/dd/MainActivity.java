@@ -16,7 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+import android.app.*;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +31,7 @@ import edu.rutgers.winlab.crowdpp.util.FileProcess;
 import edu.rutgers.winlab.crowdpp.util.Now;
 
 
-public class MainActivity extends ActionBarActivity{
+public class MainActivity extends Activity{
 
 	TextView status;
 	TextView thresholds;
